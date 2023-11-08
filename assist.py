@@ -30,13 +30,13 @@ class Assistant:
         """
         Call a model with an instruction and return the model's output.
         """
-        return "Model output for instruction: {}".format(instruction)
+        return f"Model output for instruction: {instruction}"
     
     def use_tool(self, tool_name, params):
         """
         Use a tool with the given parameters and return the tool's output.
         """
-        return "Used tool {} with params: {}".format(tool_name, params)
+        return f"Used tool {tool_name} with params: {params}"
     
     def __repr__(self):
         return f"Assistant(models={self.models}, tools={self.tools})"
