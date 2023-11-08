@@ -1,29 +1,35 @@
 import os
+import heapq
 from string import Template
 
 class Task:
-    def __init__(self, task_id, instructions, consumed_variables=None, created_variables=None):
+    def __init__(self, task_id, instructions, consumed_variables=None, created_variables=None, priority=0, dependencies=None):
         self.task_id = task_id
         self.instructions = instructions
         self.consumed_variables = consumed_variables or []
         self.created_variables = created_variables or []
+        self.priority = priority
+        self.dependencies = dependencies or []
         self.status = 'incomplete'
 
 class ProjectAssistant:
     def __init__(self):
-        self.tasks = {}
+        self.tasks = []
         self.task_variables = {}
 
-    def add_task(self, task_id, description, consumed_variables=None, created_variables=None):
-        if task_id in self.tasks:
+    def add_task(self, task_id, description, consumed_variables=None, created_variables=None, priority=0, dependencies=None):
+        if any(task.task_id == task_id for _, task in self.tasks):
             raise KeyError(f"A task with ID {task_id} already exists.")
-        self.tasks[task_id] = Task(task_id, description, consumed_variables, created_variables)
+        task = Task(task_id, description, consumed_variables, created_variables, priority, dependencies)
+        heapq.heappush(self.tasks, (priority, task))
         self.task_variables[task_id] = {}
 
     def update_task_status(self, task_id, status):
-        if task_id not in self.tasks:
-            raise KeyError(f"No task with ID {task_id} exists.")
-        self.tasks[task_id].status = status
+        for _, task in self.tasks:
+            if task.task_id == task_id:
+                task.status = status
+                return
+        raise KeyError(f"No task with ID {task_id} exists.")
 
     def add_task_variable(self, task_id, variable_name, variable_value):
         if task_id not in self.task_variables:
@@ -36,19 +42,22 @@ class ProjectAssistant:
         return self.task_variables[task_id]
 
     def execute_task(self, task_id, execute_func, *args, **kwargs):
-        if task_id not in self.tasks:
-            raise KeyError(f"No task with ID {task_id} exists.")
-        task = self.tasks[task_id]
-        consumed_variables = {}
-        for variable in task.consumed_variables:
-            if variable not in kwargs:
-                raise ValueError(f"Missing variable '{variable}' for task execution.")
-            consumed_variables[variable] = kwargs[variable]
-        result = execute_func(*args, **consumed_variables)
-        created_variables = {variable: result[variable] for variable in task.created_variables}
-        kwargs.update(created_variables)
-        self.task_variables[task_id] = created_variables
-        return result
+        for _, task in self.tasks:
+            if task.task_id == task_id:
+                consumed_variables = {}
+                for variable in task.consumed_variables:
+                    if variable not in kwargs:
+                        raise ValueError(f"Missing variable '{variable}' for task execution.")
+                    consumed_variables[variable] = kwargs[variable]
+                try:
+                    result = execute_func(*args, **consumed_variables)
+                except Exception as e:
+                    raise ValueError(f"Error executing task {task_id}: {str(e)}")
+                created_variables = {variable: result[variable] for variable in task.created_variables}
+                kwargs.update(created_variables)
+                self.task_variables[task_id] = created_variables
+                return result
+        raise KeyError(f"No task with ID {task_id} exists.")
 
     def read_documentation(self, doc_folder_path):
         documentation_contents = []
@@ -64,9 +73,12 @@ class ProjectAssistant:
         self.add_task(task_id, filled_template)
         return None
 
-    def execute_and_prioritize_tasks(self):
-        for task_id, task in self.tasks.items():
-            if task.status != 'completed':
-                self.execute_task(task_id, task.instructions)
-                break
-        return None
+    def execute_tasks_based_on_dependencies(self):
+        while self.tasks:
+            for i, (priority, task) in enumerate(self.tasks):
+                if all(dependency.status == 'completed' for dependency in task.dependencies):
+                    self.execute_task(task.task_id, task.instructions)
+                    break
+            else:
+                raise ValueError("Cannot execute any more tasks due to unmet dependencies.")
+            del self.tasks[i]
