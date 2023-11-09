@@ -1,6 +1,6 @@
 class WebScraper:
     def scrape_web_and_save_markdown(self, search_query):
-        web_data = self.use_tool('DuckDuckGo', {'query': search_query})
+        web_data = self.use_tool('Langchain OpenAI', {'query': search_query})
         markdown_data = convert_to_markdown(web_data)
         with open(f"{search_query.replace(' ', '_')}.md", 'w') as file:
             file.write(markdown_data)
@@ -8,7 +8,7 @@ class WebScraper:
 
 class CodeRefactorer:
     def refactor_and_rewrite_code(self, code):
-        refactored_code = self.use_tool('Sourcery', {'code': code})
+        refactored_code = self.use_tool('Langchain OpenAI', {'code': code})
         rewritten_code = self.call_model('GPT-3.5', {'code': refactored_code})
         return rewritten_code
 
