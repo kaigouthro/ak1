@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from chainbase import WebScraperAgent, CodeRefactorerAgent, LangchainAssistant
+from langchain.laapi import LLM
 
 class TestChainbase(unittest.TestCase):
     @patch('chainbase.lc.ask')
