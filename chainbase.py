@@ -3,6 +3,7 @@ from langchain.laapi import LLM  # We'll use Langchain's built-in LLM agent
 from langchain.agents import Agent  # Import the base Langchain agent class
 from langchain.utilities import save_as_markdown
 from langchain.saved_prompts import PromptLibrary
+from task_management import TaskManagement
 
 # We first create a Langchain instance
 lc = LangChain()
@@ -27,6 +28,9 @@ class WebScraperAgent(Agent):
         file_path = f"{search_query.replace(' ', '_')}.md"
         with open(file_path, 'w') as file:
             file.write(markdown_data)
+    
+    def get_search_results(self, search_query):
+        return self.scrape_and_save_as_markdown(search_query)
 
 # Defining an agent for code refactoring and rewriting
 class CodeRefactorerAgent(Agent):
@@ -39,18 +43,28 @@ class CodeRefactorerAgent(Agent):
         rewritten_code = lc.ask(rewriting_instructions, agent=LLM.queue)
         
         return rewritten_code['text']
+    
+    def get_refactored_code(self, code):
+        return self.refactor_and_rewrite_code(code)
 
 # Defining the main assistant using the Langchain tools
 class LangchainAssistant:
     def __init__(self):
         self.web_scraper = WebScraperAgent()
         self.code_refactorer = CodeRefactorerAgent()
+        self.task_manager = TaskManagement()
 
     def scrape_web_and_convert_to_markdown(self, search_query):
         self.web_scraper.scrape_and_save_as_markdown(search_query)
 
     def refactor_and_rewrite_code(self, code):
         return self.code_refactorer.refactor_and_rewrite_code(code)
+
+    def get_web_scraper(self):
+        return self.web_scraper
+
+    def get_code_refactorer(self):
+        return self.code_refactorer
 
     # Add more functionalities here...
 
