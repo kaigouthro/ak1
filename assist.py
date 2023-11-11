@@ -1,46 +1,53 @@
-class WebScraper:
-    def scrape_web_and_save_markdown(self, search_query):
-        web_data = self.use_tool('Langchain OpenAI', {'query': search_query})
-        markdown_data = convert_to_markdown(web_data)
-        with open(f"{search_query.replace(' ', '_')}.md", 'w') as file:
-            file.write(markdown_data)
-        return None
+import json
+from task_manager import TasksManager
+from langchain.agents import *
+from langchain.utilities.markdown_conversions import convert_to_markdown
+from langchain.utilities import google_serper
+from langchain.utilities import requests
+from langchain.utilities import duckduckgo_search
+from langchain.utilities import wikipedia
+from langchain.utilities import python
+from langchain.output_parsers import StructuredOutputParser
+from langchain.output_parsers import ResponseSchema
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import MultiRouteChain
 
-class CodeRefactorer:
-    def refactor_and_rewrite_code(self, code):
-        refactored_code = self.use_tool('Langchain OpenAI', {'code': code})
-        rewritten_code = self.call_model('GPT-3.5', {'code': refactored_code})
-        return rewritten_code
 
-class Assistant:
-    def __init__(self, models=None, tools=None, web_scraper=None, code_refactorer=None):
-        self.models = models if models is not None else []
-        self.tools = tools if tools is not None else []
-        self.web_scraper = web_scraper
-        self.code_refactorer = code_refactorer
-
-    def add_model(self, model):
-        self.models.append(model)
-
-    def add_tool(self, tool):
-        self.tools.append(tool)
-
-    def call_model(self, instruction):
-        return "Model output for instruction: {}".format(instruction)
-
-    def use_tool(self, tool_name, params):
-        return "Used tool {} with params: {}".format(tool_name, params)
-
-    def format_response(self, response):
-        formatted_response = json.dumps(response)
-        return formatted_response
-
-    def __repr__(self):
-        return f"Assistant(models={self.models}, tools={self.tools})"
-
-class ProjectAssistant:
-    def read_write_execute_code(self, file_name, code):
-        with open(file_name, 'w') as file:
-            file.write(code)
-        exec(code)
-        return None
+class Multiagent:
+    """
+    This class uses the different agents by using the
+    MultiRouteChain class
+    Capable of using different agents, for many tasks, focused on:
+    - code generation
+    - refactoring
+    - git commands
+    - file and folder access
+    - file and folder creation
+    - file and folder deletion
+    - file and folder renaming
+    - reading and writing file contents
+    - reading and writing python code
+    - reading and writing text
+    - reading and writing markdown
+    - reading and writing json
+    - reading and writing yaml
+    - executing python code
+    - executing shell commands
+    - executing git commands
+    - searching the internet
+    - interacting with the user
+    - scraping a web page
+    - summarizing text
+    - converting text to markdown
+    - converting text to json
+    - converting text to yaml
+    - parsing responses
+    - calling external APIs
+    - checking in with task manager and other agents
+    - dynamically adjusting it's prompt templates
+    - creating custom agents dynamically..
+    - much more!
+    """
+    def __init__(self, agent_name, task_manager, **kwargs):
+        self.agent_name   = agent_name
+        self.task_manager : TasksManager = task_manager
