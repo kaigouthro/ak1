@@ -2,21 +2,19 @@ import os
 import heapq
 from string import Template
 
-
 class Task:
     def __init__(self, task_id, instructions, consumed_variables=None, created_variables=None, priority=0, dependencies=None):
-        self.task_id            = task_id
-        self.instructions       = instructions
+        self.task_id = task_id
+        self.instructions = instructions
         self.consumed_variables = consumed_variables or []
-        self.created_variables  = created_variables or []
-        self.priority           = priority
-        self.dependencies       = dependencies or []
-        self.status             = 'incomplete'
-
+        self.created_variables = created_variables or []
+        self.priority = priority
+        self.dependencies = dependencies or []
+        self.status = 'incomplete'
 
 class TasksManager:
     def __init__(self):
-        self.tasks          = []
+        self.tasks = []
         self.task_variables = {}
 
     def add_task(self, task_id, description, consumed_variables=None, created_variables=None, priority=0, dependencies=None):
@@ -61,7 +59,6 @@ class TasksManager:
                 return result
         raise KeyError(f"No task with ID {task_id} exists.")
 
-
     def read_documentation(self, doc_folder_path):
         documentation_contents = []
         for file_name in os.listdir(doc_folder_path):
@@ -71,7 +68,7 @@ class TasksManager:
         return documentation_contents
 
     def fill_template_and_add_task(self, task_id, template_string, variables):
-        template        = Template(template_string)
+        template = Template(template_string)
         filled_template = template.substitute(variables)
         self.add_task(task_id, filled_template)
         return None
@@ -85,3 +82,9 @@ class TasksManager:
             else:
                 raise ValueError("Cannot execute any more tasks due to unmet dependencies.")
             del self.tasks[i]
+
+# Add tasks related to Langchain integration to the ProjectAssistant instance
+project_assistant = TasksManager()
+project_assistant.add_task('langchain_integration', 'Integrate Langchain OpenAI into the existing codebase.')
+project_assistant.add_task('expand_chainbase', 'Expand the chainbase.py file to include more functionalities using Langchain OpenAI.')
+project_assistant.add_task('create_langchain_runnables', 'Create Langchain runnables for efficient execution of tasks.')
