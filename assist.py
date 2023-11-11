@@ -51,3 +51,4 @@ class Multiagent:
     def __init__(self, agent_name, task_manager, **kwargs):
         self.agent_name   = agent_name
         self.task_manager : TasksManager = task_manager
+    # Implement the rest of the functionalities here...
