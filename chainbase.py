@@ -40,6 +40,10 @@ class LangchainAssistant:
     def refactor_and_rewrite_code(self, code):
         return self.code_refactorer.refactor_and_rewrite_code(code)
 
+    # Add more functionalities here...
+
+    # Add additional capabilities here...
+
 # Utilizing the Langchain Assistant in action
 # This would be an example of how to use the Assistant
 assistant = LangchainAssistant()
@@ -48,3 +52,5 @@ print(markdown_result)
 
 rewritten_code = assistant.refactor_and_rewrite_code("# Some example Python code that needs refactoring")
 print(rewritten_code)
+
+# Add more runnables here...

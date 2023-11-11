@@ -82,3 +82,9 @@ class ProjectAssistant:
             else:
                 raise ValueError("Cannot execute any more tasks due to unmet dependencies.")
             del self.tasks[i]
+
+# Add tasks related to Langchain integration to the ProjectAssistant instance
+project_assistant = ProjectAssistant()
+project_assistant.add_task('langchain_integration', 'Integrate Langchain OpenAI into the existing codebase.')
+project_assistant.add_task('expand_chainbase', 'Expand the chainbase.py file to include more functionalities using Langchain OpenAI.')
+project_assistant.add_task('create_langchain_runnables', 'Create Langchain runnables for efficient execution of tasks.')
