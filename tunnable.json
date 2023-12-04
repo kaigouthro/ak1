@@ -1,0 +1,426 @@
+{
+    "github_get_repository": {
+        "description": "Get a GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "get_repository"
+        },
+        "output_schema": {
+            "repository": {
+                "id": "The ID of the repository",
+                "name": "The name of the repository",
+                "description": "The description of the repository",
+                "owner": "The owner of the repository",
+                "url": "The URL of the repository"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_create_issue": {
+        "description": "Create a new GitHub issue",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "create_issue"
+        },
+        "output_schema": {
+            "issue": {
+                "id": "The ID of the issue",
+                "title": "The title of the issue",
+                "body": "The body of the issue",
+                "url": "The URL of the issue"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_get_pull_requests": {
+        "description": "Get pull requests from a GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "get_pull_requests"
+        },
+        "output_schema": {
+            "pull_request": {
+                "id": "The ID of the pull request",
+                "title": "The title of the pull request",
+                "body": "The body of the pull request",
+                "url": "The URL of the pull request"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_create_pull_request": {
+        "description": "Create a new GitHub pull request",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "create_pull_request"
+        },
+        "output_schema": {
+            "pull_request": {
+                "id": "The ID of the pull request",
+                "title": "The title of the pull request",
+                "body": "The body of the pull request",
+                "url": "The URL of the pull request"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_get_file_contents": {
+        "description": "Get contents of a file from a GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "get_file_contents"
+        },
+        "output_schema": {
+            "file_contents": {
+                "path": "The path of the file",
+                "content": "The content of the file",
+                "sha": "The SHA of the file"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_update_file_contents": {
+        "description": "Update contents of a file in a GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "update_file_contents"
+        },
+        "output_schema": {
+            "commit": {
+                "message": "The commit message",
+                "tree": "The tree of the committed changes",
+                "parents": "The parent commits of the commit"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_push_changes": {
+        "description": "Push changes to a GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "push_changes"
+        },
+        "output_schema": {
+            "push": {
+                "branch": "The branch that was pushed"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_create_repository": {
+        "description": "Create a new GitHub repository",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "create_repository"
+        },
+        "output_schema": {
+            "repository": {
+                "id": "The ID of the repository",
+                "name": "The name of the repository",
+                "url": "The URL of the repository"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_authenticate_as_app_installation": {
+        "description": "Authenticate as an app installation on GitHub",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "authenticate_as_app_installation"
+        },
+        "output_schema": {
+            "authorization": {
+                "token": "The authentication token",
+                "expires_at": "The expiration date of the token"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "github_create_issue_as_authenticated_installation": {
+        "description": "Create a new GitHub issue using an authenticated installation",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "github": "create_issue_as_authenticated_installation"
+        },
+        "output_schema": {
+            "issue": {
+                "id": "The ID of the issue",
+                "title": "The title of the issue",
+                "body": "The body of the issue",
+                "url": "The URL of the issue"
+            }
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "add_task": {
+        "description": "Add a task to the storage",
+        "prompt_template_type": "type",
+        "input_variables": [
+            "name",
+            "task_id",
+            "parent_id",
+            "child_ids"
+        ],
+        "template": {
+            "task_management": "add_task_template.template"
+        },
+        "output_schema": {
+            "output": "The output string after adding the task"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "remove_task": {
+        "description": "Remove a task from the storage",
+        "prompt_template_type": "type",
+        "input_variables": [
+            "task_id"
+        ],
+        "template": {
+            "task_management": "remove_task_template.template"
+        },
+        "output_schema": {
+            "output": "The output string after removing the task"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "get_all_tasks": {
+        "description": "Get all tasks from the storage",
+        "prompt_template_type": "type",
+        "input_variables": [],
+        "template": {
+            "task_management": "get_all_tasks_template.template"
+        },
+        "output_schema": {
+            "output": "The output string containing all tasks"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "get_task_by_id": {
+        "description": "Get a task by its ID from the storage",
+        "prompt_template_type": "type",
+        "input_variables": [
+            "task_id"
+        ],
+        "template": {
+            "task_management": "get_task_by_id_template.template"
+        },
+        "output_schema": {
+            "output": "The output string containing the task with the specified ID"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "get_tasks_by_parent_id": {
+        "description": "Get tasks by their parent ID from the storage",
+        "prompt_template_type": "type",
+        "input_variables": [
+            "parent_id"
+        ],
+        "template": {
+            "task_management": "get_tasks_by_parent_id_template.template"
+        },
+        "output_schema": {
+            "output": "The output string containing the tasks with the specified parent ID"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    },
+    "get_parent_by_child_id": {
+        "description": "Get parent by their child ID from the storage",
+        "prompt_template_type": "type",
+        "input_variables": [
+            "child_id"
+        ],
+        "template": {
+            "task_management": "get_parent_by_child_id_template.template"
+        },
+        "output_schema": {
+            "output": "The output string containing the parent with the specified child ID"
+        },
+        "metadata": {
+            "created_date": "2023-09-01",
+            "score": 0.0,
+            "use_count": 0
+        },
+        "depends_on": [],
+        "example_responses": [],
+        "parsing_patterns": {},
+        "categorization": {},
+        "additional_data_requests": [],
+        "model": "gpt-3.5-turbo",
+        "related_runnables": []
+    }
+}
