@@ -1,4 +1,5 @@
 import git
+import github
 import networkx
 
 
@@ -10,20 +11,28 @@ class Architecture:
     with input and output variables and current state, also what task they are asssigned to be built by
     and a basic networkx node/edge implementation for calls and control flow
 
-    - planned
-    - in progress
-    - complete
-    - passing
-    - failing
-
+    status:
+        - planned
+        - in progress
+        - complete
+        - passing
+        - failing
     """
+
     def __init__(self):
-        self.schematic = {}
-        self.parent = None
-        self.state = "planned"
-        self.inputs = None
-        self.outputs = None
+        self.elements = {
+            "module_name": {  # subgraph
+                "class_name": {  # subgraph
+                    "method_name": {  # node
+                        "params": [{"name": "", "type": "", "default": ""}]  # subnodes
+                    },
+                    "class_vars": [{"name": "", "type": ""}],  # nodes
+                },
+                "function_name": {  # nodes
+                    "params": [{"name": "", "type": "", "default": ""}]  # sub nodes
+        },}}
         self.network = networkx
+
 
 
 class _GitApi:
@@ -34,7 +43,7 @@ class _GitApi:
         self.repository_info = {}
 
     def set_client(self, address="https://api.github.com"):
-        self.client = git.Git(address)
+        self.client = github.Github(base_url=address, login_or_token=self.token)
 
     @staticmethod
     def get_repository(repository_id):
