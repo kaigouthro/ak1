@@ -1,5 +1,4 @@
-import git
-import github
+
 import networkx
 
 
@@ -42,8 +41,8 @@ class _GitApi:
         self.client = self.set_client()
         self.repository_info = {}
 
-    def set_client(self, address="https://api.github.com"):
-        self.client = github.Github(base_url=address, login_or_token=self.token)
+    def set_client(self ):
+        self.client = None
 
     @staticmethod
     def get_repository(repository_id):

@@ -65,8 +65,6 @@ class DbHandler:
         self.database = database
         self.database_path = self.generate_dbpath()
 
-        self.interface = self.initialize_interface()
-        self.session = self.start_transaction()
         self.Base = declarative_base()
 
     @staticmethod
