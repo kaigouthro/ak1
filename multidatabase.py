@@ -9,6 +9,7 @@ except ImportError:
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
+from database_interface import SQLiteInterface, PostgreSQLInterface, MySQLInterface, SnowflakeInterface
 
 class DBHandler:
     def __init__(self, database_type="sqlite", host="localhost", port=5432, user="admin", password="password", database="mydatabase"):
@@ -20,8 +21,8 @@ class DBHandler:
         self.database = database
         self.database_path = self.generate_dbpath()
 
-        self.engine = self.create_engine()
-        self.session = self.create_session()
+        self.interface = self.initialize_interface()
+        self.session = self.start_transaction()
         self.Base = declarative_base()
 
     def generate_dbpath(self):
@@ -40,13 +41,20 @@ class DBHandler:
             database=self.database
         )
 
-    def create_engine(self):
-        engine = create_engine(self.database_path)
-        return engine
+    def initialize_interface(self):
+        if self.database_type == "sqlite":
+            return SQLiteInterface(self.database_path)
+        elif self.database_type == "postgresql":
+            return PostgreSQLInterface(self.database_path)
+        elif self.database_type == "mysql":
+            return MySQLInterface(self.database_path)
+        elif self.database_type == "snowflake":
+            return SnowflakeInterface(self.database_path)
+        else:
+            raise ValueError(f"Unsupported database type: {self.database_type}")
 
-    def create_session(self):
-        Session = sessionmaker(bind=self.engine)
-        return Session()
+    def start_transaction(self):
+        return self.interface.start_transaction()
 
     def _create_base(self):
         Base = declarative_base()
