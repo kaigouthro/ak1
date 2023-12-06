@@ -1,6 +1,4 @@
-
 import streamlit as st
-
 
 def data_file_upload():
     st.session_state.db_available = st.session_state.get("db_available", False)
@@ -22,17 +20,17 @@ def data_file_download():
         if st.download_button("Download", data=contents, file_name="downloaded_database.db", mime="application/octet-stream"):
             st.success("Database file downloaded successfully.")
 
-
-
 # Streamlit app
 def main():
     st.sidebar.header("Database")
     data_file_upload()
     if st.session_state.db_file_uploaded:
-        handler = DBHandler(database="database.db")
-
-                ## Add your code here
-
+        # Determine the database type based on the file extension or other logic
+        database_type = "sqlite"  # Placeholder, should be determined dynamically
+        handler = DBHandler(database_type=database_type, database="database.db")
+        handler.initialize_interface()
+        # Perform actual database operations using the handler.interface methods
+        # Example: handler.interface.execute_query("SELECT * FROM table_name")
         data_file_download()
     else:
         st.error("No database file uploaded.")
